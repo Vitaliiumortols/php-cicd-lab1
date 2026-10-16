@@ -1,15 +1,27 @@
 # PHP CI/CD Lab
 
-Навчальний PHP-проєкт для лабораторної роботи №1 з дисципліни
-«Веб-програмування».
+[![PHP CI Application](https://github.com/Vitaliiumortols/php-cicd-lab1/actions/workflows/php-ci.yml/badge.svg)](https://github.com/Vitaliiumortols/php-cicd-lab1/actions/workflows/php-ci.yml)
+
+Навчальний PHP-проєкт для лабораторної роботи №1 з дисципліни «Веб-програмування».
 
 Мета проєкту — опанувати Git і GitHub, налаштувати автоматичну
 перевірку PHP-коду за допомогою GitHub Actions та організувати роботу
 із задачами через GitHub Issues і Projects.
 
-## Запланований функціонал
+## Функціонал
 
 - калькулятор з операціями додавання та віднімання;
-- модульні тести PHPUnit;
-- перевірка форматування коду за допомогою Laravel Pint;
-- CI-пайплайн для Pull Request і змін у гілці `main`.
+- модульні тести на PHPUnit;
+- автоматична перевірка форматування через Laravel Pint;
+- запуск CI для Pull Request і змін у гілці `main`;
+- демонстрація безпечного використання GitHub Actions Secrets.
+
+## Запуск перевірок
+
+Потрібні PHP 8.2 і Composer.
+
+```bash
+composer install
+./vendor/bin/pint --test
+./vendor/bin/phpunit tests/Unit
+```
