@@ -1,0 +1,249 @@
+@startuml
+!pragma layout smetana
+title Діаграма класів інтернет-магазину Boardly
+left to right direction
+
+skinparam backgroundColor #FAFBFF
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam ArrowColor #334155
+skinparam ClassBorderColor #475569
+skinparam ClassBackgroundColor #FFFFFF
+skinparam ClassHeaderBackgroundColor #E0E7FF
+skinparam ClassFontColor #0F172A
+skinparam PackageBorderColor #94A3B8
+
+package "Models (Eloquent)" #F8FAFC {
+  abstract class User {
+    -id: int
+    -name: String
+    -email: String
+    -passwordHash: String
+    -status: UserStatus
+    +authenticate(password: String): bool
+    +updateProfile(name: String, email: String): void
+    +changePassword(oldPassword: String, newPassword: String): bool
+    +deactivate(reason: String): void
+    +hasRole(role: String): bool
+  }
+
+  class Customer {
+    -phone: String
+    -loyaltyPoints: int
+    -defaultAddress: String
+    -registeredAt: DateTime
+    -newsletterSubscribed: bool
+    +addToCart(product: Product, quantity: int): CartItem
+    +placeOrder(cart: Cart): Order
+    +addReview(product: Product, rating: int): Review
+    +updateAddress(address: String): void
+    +earnPoints(amount: Decimal): int
+  }
+
+  class Administrator {
+    -employeeCode: String
+    -permissions: Set<String>
+    -lastLoginAt: DateTime
+    -department: String
+    -isSuperAdmin: bool
+    +createProduct(data: Map): Product
+    +updateProduct(product: Product, data: Map): Product
+    +disableUser(user: User): void
+    +changeOrderStatus(order: Order, status: OrderStatus): void
+    +generateReport(period: DateRange): Report
+  }
+
+  class Category {
+    -id: int
+    -name: String
+    -slug: String
+    -description: Text
+    -isActive: bool
+    +addProduct(product: Product): void
+    +removeProduct(product: Product): void
+    +rename(name: String): void
+    +activate(): void
+    +deactivate(): void
+  }
+
+  class Product {
+    -id: int
+    -sku: String
+    -name: String
+    -price: Decimal
+    -stockQuantity: int
+    +updatePrice(price: Decimal): void
+    +changeStock(delta: int): int
+    +assignCategory(category: Category): void
+    +isAvailable(quantity: int): bool
+    +averageRating(): float
+  }
+
+  class Cart {
+    -id: int
+    -customerId: int
+    -status: CartStatus
+    -createdAt: DateTime
+    -updatedAt: DateTime
+    +addItem(product: Product, quantity: int): CartItem
+    +removeItem(productId: int): void
+    +changeQuantity(productId: int, quantity: int): void
+    +calculateTotal(): Decimal
+    +clear(): void
+  }
+
+  class CartItem {
+    -id: int
+    -cartId: int
+    -productId: int
+    -quantity: int
+    -unitPrice: Decimal
+    +subtotal(): Decimal
+    +increase(amount: int): int
+    +decrease(amount: int): int
+    +changeQuantity(quantity: int): void
+    +validateStock(): bool
+  }
+
+  class Order {
+    -id: int
+    -orderNumber: String
+    -customerId: int
+    -status: OrderStatus
+    -totalAmount: Decimal
+    +addItem(product: Product, quantity: int): OrderItem
+    +calculateTotal(): Decimal
+    +confirm(): void
+    +cancel(reason: String): void
+    +changeStatus(status: OrderStatus): void
+  }
+
+  class OrderItem {
+    -id: int
+    -orderId: int
+    -productId: int
+    -quantity: int
+    -unitPrice: Decimal
+    +subtotal(): Decimal
+    +increase(amount: int): int
+    +decrease(amount: int): int
+    +reserveStock(): bool
+    +releaseStock(): void
+  }
+
+  class Payment {
+    -id: int
+    -orderId: int
+    -provider: String
+    -status: PaymentStatus
+    -amount: Decimal
+    +authorize(token: String): bool
+    +capture(): bool
+    +refund(amount: Decimal): bool
+    +fail(reason: String): void
+    +isSuccessful(): bool
+  }
+
+  class Shipment {
+    -id: int
+    -orderId: int
+    -carrier: String
+    -trackingNumber: String
+    -status: ShipmentStatus
+    +createLabel(): String
+    +dispatch(): void
+    +updateTracking(status: ShipmentStatus): void
+    +markDelivered(at: DateTime): void
+    +estimateDelivery(): Date
+  }
+
+  class Review {
+    -id: int
+    -customerId: int
+    -productId: int
+    -rating: int
+    -comment: Text
+    +publish(): void
+    +edit(rating: int, comment: Text): void
+    +hide(reason: String): void
+    +validateRating(): bool
+    +belongsToVerifiedBuyer(): bool
+  }
+}
+
+package "Controllers (HTTP)" #EEF2FF {
+  class ProductController <<Controller>> {
+    -productService: ProductService
+    -request: HttpRequest
+    -response: HttpResponse
+    -validator: Validator
+    -paginator: Paginator
+    +index(filters: Map): HttpResponse
+    +show(id: int): HttpResponse
+    +store(data: Map): HttpResponse
+    +update(id: int, data: Map): HttpResponse
+    +destroy(id: int): HttpResponse
+  }
+
+  class CartController <<Controller>> {
+    -cartService: CartService
+    -request: HttpRequest
+    -response: HttpResponse
+    -validator: Validator
+    -auth: AuthManager
+    +show(): HttpResponse
+    +add(productId: int, quantity: int): HttpResponse
+    +update(itemId: int, quantity: int): HttpResponse
+    +remove(itemId: int): HttpResponse
+    +clear(): HttpResponse
+  }
+
+  class OrderController <<Controller>> {
+    -orderService: OrderService
+    -paymentService: PaymentService
+    -request: HttpRequest
+    -response: HttpResponse
+    -auth: AuthManager
+    +index(): HttpResponse
+    +show(id: int): HttpResponse
+    +store(data: Map): HttpResponse
+    +cancel(id: int, reason: String): HttpResponse
+    +updateStatus(id: int, status: OrderStatus): HttpResponse
+  }
+}
+
+User <|-- Customer : наслідування
+User <|-- Administrator : наслідування
+Category "1" o-- "0..*" Product : агрегація
+Customer "1" *-- "0..1" Cart : композиція
+Cart "1" *-- "0..*" CartItem : композиція
+Order "1" *-- "1..*" OrderItem : композиція
+Order "1" *-- "0..1" Payment : композиція
+Order "1" *-- "0..1" Shipment : композиція
+Customer "1" --> "0..*" Order : оформлює
+Customer "1" --> "0..*" Review : залишає
+Product "1" <-- "0..*" CartItem : обраний товар
+Product "1" <-- "0..*" OrderItem : придбаний товар
+Product "1" <-- "0..*" Review : оцінюється
+Administrator --> Product : керує
+Administrator --> Order : опрацьовує
+Administrator --> User : адмініструє
+ProductController ..> Product : використовує
+ProductController ..> Category : використовує
+CartController ..> Cart : використовує
+CartController ..> CartItem : використовує
+OrderController ..> Order : використовує
+OrderController ..> Payment : використовує
+OrderController ..> Shipment : використовує
+
+legend bottom
+  |= Зв'язок |= UML-відношення |
+  | <|-- | наслідування (generalization) |
+  | o-- | агрегація (aggregation) |
+  | *-- | композиція (composition) |
+  | --> | асоціація (association) |
+  | ..> | залежність контролера від моделі |
+endlegend
+@enduml

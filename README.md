@@ -25,3 +25,11 @@ composer install
 ./vendor/bin/pint --test
 ./vendor/bin/phpunit tests/Unit
 ```
+
+## Проєктування системи
+
+Матеріали лабораторної роботи №2 для інтернет-магазину настільних
+ігор **Boardly** розміщено у файлі
+[`docs/architecture.md`](docs/architecture.md). Документ містить аналіз
+предметної галузі, три форми Use Case та UML-діаграми варіантів
+використання і класів разом із вихідним кодом PlantUML.

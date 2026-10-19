@@ -1,0 +1,86 @@
+@startuml
+!pragma layout smetana
+title Діаграма варіантів використання інтернет-магазину Boardly
+left to right direction
+
+skinparam backgroundColor #FAFBFF
+skinparam shadowing false
+skinparam roundcorner 18
+skinparam linetype ortho
+skinparam actorStyle awesome
+skinparam ArrowColor #334155
+skinparam ActorBorderColor #1D4ED8
+skinparam ActorFontColor #0F172A
+skinparam UsecaseBorderColor #4F46E5
+skinparam UsecaseBackgroundColor #EEF2FF
+skinparam UsecaseFontColor #0F172A
+skinparam RectangleBorderColor #94A3B8
+skinparam RectangleBackgroundColor #FFFFFF
+
+actor "Гість" as Guest
+actor "Покупець" as Customer
+actor "Адміністратор" as Administrator
+
+rectangle "Інтернет-магазин настільних ігор Boardly" {
+  usecase "Переглядати\nкаталог" as UC_Browse
+  usecase "Шукати та\nфільтрувати товари" as UC_Search
+  usecase "Реєструватися" as UC_Register
+  usecase "Переглядати\nкартку товару" as UC_Product
+
+  usecase "Додавати товар\nдо кошика" as UC_Cart
+  usecase "Оформлювати\nзамовлення" as UC_Checkout
+  usecase "Відстежувати\nзамовлення" as UC_Track
+  usecase "Керувати\nпрофілем" as UC_Profile
+  usecase "Залишати\nвідгук" as UC_Review
+
+  usecase "Перевіряти\nзалишки" as UC_Stock
+  usecase "Розраховувати\nвартість" as UC_Total
+  usecase "Створювати\nзамовлення" as UC_CreateOrder
+  usecase "Опрацьовувати\nоплату" as UC_Payment
+  usecase "Онлайн-оплата" as UC_OnlinePayment
+  usecase "Післяплата" as UC_CashOnDelivery
+  usecase "Застосовувати\nпромокод" as UC_Promo
+  usecase "Скасовувати\nзамовлення" as UC_Cancel
+
+  usecase "Керувати\nкаталогом" as UC_ManageCatalog
+  usecase "Опрацьовувати\nзамовлення" as UC_ManageOrders
+  usecase "Керувати\nкористувачами" as UC_ManageUsers
+  usecase "Переглядати\nзвіти" as UC_Reports
+}
+
+Guest --> UC_Browse
+Guest --> UC_Search
+Guest --> UC_Register
+
+Customer --> UC_Cart
+Customer --> UC_Checkout
+Customer --> UC_Track
+Customer --> UC_Profile
+Customer --> UC_Review
+
+Administrator --> UC_ManageCatalog
+Administrator --> UC_ManageOrders
+Administrator --> UC_ManageUsers
+Administrator --> UC_Reports
+
+UC_Browse ..> UC_Product : <<include>>
+UC_Search ..> UC_Product : <<include>>
+UC_Cart ..> UC_Stock : <<include>>
+UC_Checkout ..> UC_Stock : <<include>>
+UC_Checkout ..> UC_Total : <<include>>
+UC_Checkout ..> UC_CreateOrder : <<include>>
+UC_Checkout ..> UC_Payment : <<include>>
+UC_OnlinePayment --|> UC_Payment : узагальнення
+UC_CashOnDelivery --|> UC_Payment : узагальнення
+UC_Promo ..> UC_Checkout : <<extend>>
+UC_Cancel ..> UC_Track : <<extend>>
+UC_Review ..> UC_Product : <<extend>>
+
+legend right
+  |= Позначення |= Значення |
+  | суцільна лінія | асоціація актора з варіантом використання |
+  | --|> | узагальнення варіантів використання |
+  | <<include>> | обов'язкове включення поведінки |
+  | <<extend>> | умовне розширення поведінки |
+endlegend
+@enduml
