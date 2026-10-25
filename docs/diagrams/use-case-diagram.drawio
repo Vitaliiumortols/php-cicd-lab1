@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="draw.io" version="24.7.17" type="device">
+  <diagram id="Варіанти використання" name="Варіанти використання">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2050" pageHeight="1350" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="iPhoneHub | Діаграма варіантів використання" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=30;fontColor=#172b4d;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="1970" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Інтернет-магазин нових iPhone. Межа системи: вебзастосунок магазину." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=19;fontColor=#53657c;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="82" width="1970" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="iPhoneHub" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#8496ab;strokeWidth=2;verticalAlign=top;align=left;spacingLeft=22;spacingTop=16;fontStyle=1;fontSize=23;" vertex="1" parent="1">
+          <mxGeometry x="250" y="155" width="1350" height="970" as="geometry" />
+        </mxCell>
+        <mxCell id="buyer" value="Покупець" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#ffffff;strokeColor=#172b4d;strokeWidth=2;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="manager" value="Менеджер" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#ffffff;strokeColor=#172b4d;strokeWidth=2;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1740" y="380" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="admin" value="Адміністратор" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#ffffff;strokeColor=#172b4d;strokeWidth=2;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1740" y="840" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uc01" value="UC-01&#10;Переглянути каталог" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="340" y="245" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc02" value="UC-02&#10;Керувати кошиком" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="340" y="390" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc03" value="UC-03&#10;Оформити замовлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="340" y="550" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="stock" value="Перевірити&#10;доступну кількість" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="805" y="500" width="300" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="sum" value="Розрахувати&#10;підсумкову суму" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="805" y="660" width="300" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="comment" value="Додати коментар&#10;до замовлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="340" y="810" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc04" value="UC-04&#10;Опрацювати замовлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="245" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc05" value="UC-05&#10;Оновити залишки" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="390" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc06" value="UC-06&#10;Оформити відправлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="535" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc07" value="UC-07&#10;Керувати каталогом" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;fillColor=#f4f1fc;strokeColor=#78649c;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="745" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc08" value="UC-08&#10;Керувати користувачами" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;fillColor=#f4f1fc;strokeColor=#78649c;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="880" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="uc09" value="UC-09&#10;Сформувати звіт" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;ellipse;fillColor=#edf5fc;strokeColor=#3e678a;strokeWidth=2;align=center;verticalAlign=middle;fontSize=20;fillColor=#f4f1fc;strokeColor=#78649c;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="1015" width="310" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="b0" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="buyer" target="uc01">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="buyer" target="uc02">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="buyer" target="uc03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m0" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manager" target="uc04">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manager" target="uc05">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manager" target="uc06">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc07">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc08">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="uc09">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include1" value="«include»" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="uc03" target="stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="include2" value="«include»" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="uc03" target="sum">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="extend1" value="«extend»&#10;[покупець вводить коментар]" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="comment" target="uc03">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="generalization" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;endArrow=block;endFill=0;endSize=20;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin" target="manager">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1910" y="890" />
+              <mxPoint x="1910" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="inherit_note" value="Адміністратор також має&#10;всі повноваження&#10;менеджера" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=17;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="1625" y="640" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="condition" value="Точка розширення UC-03:&#10;перед підтвердженням замовлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="285" y="940" width="450" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="scope" value="Оплата під час отримання;&#10;доставку вносить менеджер.&#10;Зовнішніх API в цій версії немає." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="775" y="895" width="405" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Суцільна лінія — асоціація · Порожній трикутник — узагальнення&#10;«include» — обов’язкова дія · «extend» — дія за вказаною умовою" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=19;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="250" y="1170" width="1400" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
