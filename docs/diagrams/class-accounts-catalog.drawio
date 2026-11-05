@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="draw.io" version="24.7.17" type="device">
+  <diagram id="Дані: облікові записи і каталог" name="Дані: облікові записи і каталог">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="1600" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="iPhoneHub | Дані: облікові записи і каталог" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=30;fontColor=#172b4d;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="1520" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Детальний аркуш є частиною повної діаграми класів." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=19;fontColor=#53657c;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="82" width="1520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="User" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="175" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="User_header" value="User&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="User">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="User_attributes" value="- id: int&#10;- name: string&#10;- email: string&#10;- passwordHash: string&#10;- phone: string&#10;- role: string&#10;- active: bool" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="User">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="User_operations" value="+ rename(name: string): void&#10;+ changePhone(phone: string): void&#10;+ verifyPassword(password: string): bool&#10;+ assignRole(role: string): void&#10;+ deactivate(): void" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="User">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="Category" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="175" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Category_header" value="Category&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="Category">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Category_attributes" value="- id: int&#10;- name: string&#10;- slug: string&#10;- description: string&#10;- active: bool" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Category">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Category_operations" value="+ rename(name: string): void&#10;+ changeDescription(text: string): void&#10;+ setActive(active: bool): void&#10;+ attachProduct(product: Product): void&#10;+ detachProduct(product: Product): void" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Category">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="Product" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="905" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Product_header" value="Product&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="Product">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Product_attributes" value="- id: int&#10;- categoryId: ?int&#10;- modelName: string&#10;- color: string&#10;- storageGb: int&#10;- sku: string&#10;- priceKop: int&#10;- stockQty: int&#10;- reservedQty: int&#10;- active: bool" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Product">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Product_operations" value="+ reserve(qty: int): bool&#10;+ release(qty: int): void&#10;+ adjustStock(delta: int): void&#10;+ changePrice(priceKop: int): void&#10;+ availableQty(): int" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Product">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="Shipment" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="905" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Shipment_header" value="Shipment&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="Shipment">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Shipment_attributes" value="- id: int&#10;- orderId: int&#10;- recipient: string&#10;- phone: string&#10;- address: string&#10;- carrier: string&#10;- trackingNumber: ?string&#10;- status: string&#10;- deliveredAt: ?DateTime" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Shipment">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Shipment_operations" value="+ schedule(address: string): void&#10;+ dispatch(tracking: string): void&#10;+ markDelivered(at: DateTime): void&#10;+ trackingInfo(): Map&#10;+ changeAddress(address: string): void" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Shipment">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="detailNote" value="Зв’язки між усіма моделями та залежності контролерів наведено на повній схемі class-diagram." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1490" width="1500" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

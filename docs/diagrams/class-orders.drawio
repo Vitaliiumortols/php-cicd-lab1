@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="draw.io" version="24.7.17" type="device">
+  <diagram id="Дані: кошик і замовлення" name="Дані: кошик і замовлення">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="1600" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="iPhoneHub | Дані: кошик і замовлення" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=30;fontColor=#172b4d;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="25" width="1520" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Детальний аркуш є частиною повної діаграми класів." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=19;fontColor=#53657c;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="82" width="1520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Cart" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="175" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Cart_header" value="Cart&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="Cart">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Cart_attributes" value="- id: int&#10;- userId: int&#10;- status: string&#10;- createdAt: DateTime&#10;- updatedAt: DateTime" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Cart">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Cart_operations" value="+ add(product: Product, qty: int): CartItem&#10;+ changeQuantity(itemId: int, qty: int): void&#10;+ remove(itemId: int): void&#10;+ totalKop(): int&#10;+ clear(): void" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Cart">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="CartItem" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="175" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="CartItem_header" value="CartItem&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="CartItem">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="CartItem_attributes" value="- id: int&#10;- cartId: int&#10;- productId: int&#10;- quantity: int&#10;- createdAt: DateTime" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="CartItem">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="CartItem_operations" value="+ changeQuantity(qty: int): void&#10;+ subtotalKop(): int&#10;+ validateQuantity(): bool&#10;+ belongsToCart(cartId: int): bool&#10;+ product(): Product" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="CartItem">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="Order" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="905" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="Order_header" value="Order&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="Order">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="Order_attributes" value="- id: int&#10;- userId: int&#10;- number: string&#10;- status: string&#10;- paymentStatus: string&#10;- totalKop: int&#10;- comment: ?string&#10;- checkoutKey: string&#10;- reserveExpiresAt: DateTime&#10;- paidAt: ?DateTime" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Order">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Order_operations" value="+ confirm(): void&#10;+ cancel(reason: string): void&#10;+ markPaid(amountKop: int, at: DateTime): void&#10;+ calculateTotalKop(): int&#10;+ canCancel(): bool" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="Order">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="OrderItem" value="" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;rounded=0;fillColor=#ffffff;strokeColor=#3e678a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="905" width="620" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="OrderItem_header" value="OrderItem&#10;«model»" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#edf5fc;strokeColor=#3e678a;fontSize=22;fontStyle=1;align=center;" vertex="1" parent="OrderItem">
+          <mxGeometry x="0" y="0" width="620" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="OrderItem_attributes" value="- id: int&#10;- orderId: int&#10;- productId: int&#10;- productName: string&#10;- sku: string&#10;- quantity: int&#10;- unitPriceKop: int" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=12;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="OrderItem">
+          <mxGeometry x="0" y="64" width="620" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="OrderItem_operations" value="+ subtotalKop(): int&#10;+ matchesProduct(productId: int): bool&#10;+ snapshot(product: Product, qty: int): void&#10;+ validateSnapshot(): bool&#10;+ describe(): string" style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;fillColor=#ffffff;strokeColor=#3e678a;align=left;verticalAlign=top;spacingTop=14;spacingLeft=16;fontFamily=Courier New;fontSize=18;" vertex="1" parent="OrderItem">
+          <mxGeometry x="0" y="364" width="620" height="196" as="geometry" />
+        </mxCell>
+        <mxCell id="compositionCart" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;startArrow=diamond;startFill=1;startSize=19;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="Cart" target="CartItem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="compositionCart_s" value="1" style="edgeLabel;html=0;resizable=0;align=center;verticalAlign=middle;fontSize=17;fontFamily=Arial;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="compositionCart">
+          <mxGeometry x="-0.8" y="-14" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="compositionCart_t" value="0..*" style="edgeLabel;html=0;resizable=0;align=center;verticalAlign=middle;fontSize=17;fontFamily=Arial;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="compositionCart">
+          <mxGeometry x="0.8" y="-14" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="compositionOrder" value="" style="html=0;rounded=0;strokeWidth=2;strokeColor=#52657c;fontFamily=Arial;fontSize=18;fontColor=#172b4d;labelBackgroundColor=#ffffff;endArrow=none;startArrow=diamond;startFill=1;startSize=19;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="Order" target="OrderItem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="compositionOrder_s" value="1" style="edgeLabel;html=0;resizable=0;align=center;verticalAlign=middle;fontSize=17;fontFamily=Arial;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="compositionOrder">
+          <mxGeometry x="-0.8" y="-14" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="compositionOrder_t" value="1..*" style="edgeLabel;html=0;resizable=0;align=center;verticalAlign=middle;fontSize=17;fontFamily=Arial;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="compositionOrder">
+          <mxGeometry x="0.8" y="-14" relative="1" as="geometry">
+            <mxPoint x="0" y="0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="detailNote" value="Зв’язки між усіма моделями та залежності контролерів наведено на повній схемі class-diagram." style="fontFamily=Arial;fontColor=#172b4d;fontSize=19;html=0;whiteSpace=nowrap;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontColor=#172b4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1490" width="1500" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
