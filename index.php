@@ -1,103 +1,122 @@
 <?php
 
 declare(strict_types=1);
-use Faker\Factory;
+
+use App\Core\Database;
+use App\Core\EntityFactory;
+use App\Services\ConsoleLogger;
+use App\Services\EntityService;
+use App\Tasks\DepartmentHead;
+use App\Tasks\EnterpriseManager;
+use App\Tasks\Group;
+use App\Tasks\SquareMatrix;
+use App\Tasks\Student;
+use App\Tasks\WorkshopManager;
 
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/app/Services/EntityService.php';
-require_once __DIR__.'/app/Services/DataProcessor.php';
 
-$faker = Factory::create();
-$prices = [];
+ob_start();
+$database1 = Database::getInstance();
+$databaseMessage = ob_get_clean();
+$database2 = Database::getInstance();
+$singletonResult = $database1 === $database2
+    ? 'Singleton працює: використано один екземпляр'
+    : 'Помилка Singleton';
 
-// Навчальні ціни у гривнях, а не реальні пропозиції магазину.
-for ($i = 0; $i < 10; $i++) {
-    $prices[] = $faker->numberBetween(20000, 70000);
-}
+$factory = new EntityFactory;
+$product = $factory->createEntity('product', [
+    'id' => 'p1',
+    'createdAt' => '2026-11-07',
+    'name' => 'iPhone 16',
+    'price' => 42999.0,
+]);
+$user = $factory->createEntity('user', [
+    'id' => 'u1',
+    'createdAt' => '2026-11-07',
+    'name' => 'Віталій',
+    'email' => 'vitalii@example.com',
+]);
 
-$minPrice = 40000;
-$filteredPrices = array_filter($prices, function (int $price) use ($minPrice): bool {
-    return $price > $minPrice;
-});
+ob_start();
+$service = new EntityService(new ConsoleLogger);
+$service->showDetails($product);
+$serviceResult = ob_get_clean();
 
-// Вхідні дані індивідуальних завдань задаємо у коді.
-$numbers = [3, 5, 7, 10, 15];
-$text = 'У нашому магазині можна купити новий iPhone';
-$sum = sumNaturalNumbers($numbers);
-$lastWords = lastThreeWords($text);
-$mixedWords = shuffleWords($text);
+$group = new Group(42, 'КН-42');
+$group->addStudent(new Student(1, 'Віталій', 'Томенко', '2005-01-10'));
+$group->addStudent(new Student(2, 'Олена', 'Коваль', '2005-03-15'));
+$foundStudent = $group->searchStudent('Томенко');
+$group->removeStudent(2);
+
+$workers = [
+    new WorkshopManager('Керівник цеху', 20000),
+    new DepartmentHead('Начальник відділу', 20000),
+    new EnterpriseManager('Керівник підприємства', 20000),
+];
+
+$matrix = new SquareMatrix([
+    [1, 2, 3],
+    [0, 4, 5],
+    [1, 0, 6],
+]);
 ?>
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лабораторна №3 — магазин iPhone</title>
+    <title>Лабораторна №4 — ООП в PHP</title>
     <style>
         body { max-width: 900px; margin: 32px auto; padding: 0 16px; font-family: Arial, sans-serif; line-height: 1.6; color: #222; background: #f5f6f8; }
         section { margin: 20px 0; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; }
-        h1, h2, h3 { line-height: 1.3; }
+        h1, h2 { line-height: 1.3; }
         h2 { margin-top: 0; font-size: 22px; }
-        h3 { font-size: 18px; }
-        .error { color: #a02020; }
+        pre { overflow-x: auto; padding: 12px; background: #f3f3f3; }
         .result { font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Основи PHP: структури даних, функції</h1>
-    <p>Лабораторна робота №3 · Варіант 15 · Інтернет-магазин iPhone</p>
+    <h1>ООП в PHP: архітектура та патерни</h1>
+    <p>Лабораторна робота №4 · Варіант 18 · Інтернет-магазин iPhone</p>
     <p>Томенко Віталій Ігорович, КН-42</p>
 
     <section>
-        <h2>1. Індексний та асоціативний масиви</h2>
-        <?php require __DIR__.'/app/Models/EntityArray.php'; ?>
+        <h2>1. Singleton, Factory та наслідування</h2>
+        <p><?= htmlspecialchars($databaseMessage) ?></p>
+        <p class="result"><?= htmlspecialchars($singletonResult) ?></p>
+        <p><?= htmlspecialchars($product->getDetails()) ?></p>
+        <p><?= htmlspecialchars($user->getDetails()) ?></p>
     </section>
 
     <section>
-        <h2>2. Функція з типізованими аргументами</h2>
-        <p>На складі: <?= $product['stockQty'] ?> шт. У резерві: <?= $product['reservedQty'] ?> шт.</p>
-        <p class="result">Доступно для продажу: <?= availableQty($product['stockQty'], $product['reservedQty']) ?> шт.</p>
+        <h2>2. Інтерфейс і трейт експорту</h2>
+        <pre><?= htmlspecialchars($product->exportToJson()) ?></pre>
     </section>
 
     <section>
-        <h2>3. Faker та замикання з use</h2>
-        <p>Згенеровано 10 випадкових цін у гривнях:</p>
-        <p><?= implode(', ', $prices) ?></p>
-        <p>Ціни, більші за <?= $minPrice ?> грн:</p>
-        <p class="result"><?= $filteredPrices ? implode(', ', $filteredPrices) : 'Немає цін за цим критерієм.' ?></p>
-        <p>Після оновлення сторінки ціни генеруються заново.</p>
+        <h2>3. Dependency Injection</h2>
+        <p><?= nl2br(htmlspecialchars($serviceResult)) ?></p>
     </section>
 
     <section>
-        <h2>4. Обробка винятку</h2>
-        <?php $price = $product['priceKop'] / 100; ?>
-        <p>Початкова ціна: <?= number_format($price, 2, ',', ' ') ?> грн.</p>
-        <p>Ціна зі знижкою 10%: <?= number_format(applyDiscount($price, 10.0), 2, ',', ' ') ?> грн.</p>
-        <p>Спроба застосувати некоректну знижку 150%:</p>
-        <?php
-        try {
-            applyDiscount($price, 150.0);
-        } catch (Exception $e) {
-            echo '<p class="error">'.htmlspecialchars($e->getMessage()).'</p>';
-        } finally {
-            echo '<p>Спробу розрахунку завершено.</p>';
-        }
-?>
+        <h2>4. Варіант 18 — Student і Group</h2>
+        <p>Знайдено студента: <strong><?= htmlspecialchars($foundStudent?->getFullName() ?? 'не знайдено') ?></strong></p>
+        <p>Кількість студентів після видалення: <strong><?= count($group->getStudents()) ?></strong></p>
     </section>
 
     <section>
-        <h2>5. Індивідуальні завдання — варіант 15</h2>
-        <h3>Таблиця 3.2, №6: сума натуральних чисел</h3>
-        <p>Числа: <?= implode(', ', $numbers) ?></p>
-        <p class="result">Сума: <?= $sum ?></p>
+        <h2>5. Варіант 18 — ієрархія працівників</h2>
+        <ul>
+            <?php foreach ($workers as $worker) { ?>
+                <li><?= htmlspecialchars($worker->getName()) ?>: <strong><?= $worker->calculateSalary() ?> грн</strong></li>
+            <?php } ?>
+        </ul>
+    </section>
 
-        <h3>Таблиця 3.3, №3: останні три слова</h3>
-        <p>Початковий рядок: <?= htmlspecialchars($text) ?></p>
-        <p class="result">Результат: <?= htmlspecialchars($lastWords) ?></p>
-
-        <h3>Таблиця 3.4, №3: перемішування слів</h3>
-        <p>Початковий рядок: <?= htmlspecialchars($text) ?></p>
-        <p class="result">Результат: <?= htmlspecialchars($mixedWords) ?></p>
+    <section>
+        <h2>6. Варіант 18 — матриця 3x3</h2>
+        <p>Сума головної діагоналі: <strong><?= $matrix->getMainDiagonalSum() ?></strong></p>
+        <p>Визначник матриці: <strong><?= $matrix->getDeterminant() ?></strong></p>
     </section>
 </body>
 </html>
