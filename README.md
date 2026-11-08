@@ -2,45 +2,52 @@
 
 [![PHP CI Application](https://github.com/Vitaliiumortols/php-cicd-lab1/actions/workflows/php-ci.yml/badge.svg)](https://github.com/Vitaliiumortols/php-cicd-lab1/actions/workflows/php-ci.yml)
 
-Навчальний PHP-проєкт для лабораторної роботи №1 з дисципліни «Веб-програмування».
+Навчальний репозиторій з лабораторних робіт із вебпрограмування.
 
-Мета проєкту — опанувати Git і GitHub, налаштувати автоматичну
-перевірку PHP-коду за допомогою GitHub Actions та організувати роботу
-із задачами через GitHub Issues і Projects.
+## Лабораторна робота №5
 
-## Функціонал
+Предметна область — інтернет-магазин iPhone. У проєкті використано Laravel 12 та PHP 8.2.
 
-- калькулятор з операціями додавання та віднімання;
-- модульні тести на PHPUnit;
-- автоматична перевірка форматування через Laravel Pint;
-- запуск CI для Pull Request і змін у гілці `main`;
-- демонстрація безпечного використання GitHub Actions Secrets.
+Реалізовано:
 
-## Лабораторна робота №3
+- маршрутизацію Laravel;
+- контролери `ProductController` і `CatalogController`;
+- перевірку вхідних даних товару;
+- middleware `CheckStoreClient`;
+- JSON-відповіді зі статусами 200, 201, 403, 404 і 422;
+- функціональні тести;
+- автоматичну перевірку Pint і PHPUnit у GitHub Actions.
 
-Додано навчальну сторінку інтернет-магазину iPhone для варіанта 15:
+## Основні маршрути
 
-- масиви з даними Product;
-- типізовані функції та обробка винятків;
-- генерація тестових цін за допомогою Faker;
-- фільтрація цін анонімною функцією з `use`;
-- сума натуральних чисел, останні три слова та перемішування слів.
+| Метод | Маршрут | Призначення |
+|---|---|---|
+| GET | `/` | Стартова сторінка Laravel |
+| GET | `/health` | Перевірка роботи застосунку |
+| GET | `/system-info` | Інформація про систему |
+| GET | `/products` | Список товарів |
+| GET | `/products/{id}` | Один товар |
+| POST | `/products` | Створення товару |
 
-Запуск сторінки:
+Для POST-запиту потрібно передати заголовок `X-Store-Client`. Якщо заголовка немає, middleware повертає статус 403.
+
+## Запуск
 
 ```bash
 composer install
-php -S localhost:8000
+cp .env.example .env
+php artisan key:generate
+php artisan serve
 ```
 
-Після цього потрібно відкрити `http://localhost:8000`.
+Після запуску застосунок доступний за адресою `http://127.0.0.1:8000`.
 
-## Запуск перевірок
-
-Потрібні PHP 8.2 і Composer.
+## Перевірка
 
 ```bash
-composer install
 ./vendor/bin/pint --test
-./vendor/bin/phpunit tests/Unit
+php artisan test
+php artisan route:list --except-vendor
 ```
+
+Автор: Томенко Віталій Ігорович, КН-42.

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core;
 
 use App\Models\AbstractEntity;
+use App\Models\OopUser;
 use App\Models\Product;
-use App\Models\User;
 use InvalidArgumentException;
 
 class EntityFactory
@@ -20,7 +20,7 @@ class EntityFactory
                 $data['name'],
                 $data['price']
             ),
-            'user' => new User(
+            'user' => new OopUser(
                 $data['id'],
                 $data['createdAt'],
                 $data['name'],
