@@ -18,14 +18,20 @@ jobs:
         with:
           php-version: "8.2"
 
+      - name: Prepare environment
+        run: cp .env.example .env
+
       - name: Install dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install -q --no-ansi --no-interaction --no-progress --prefer-dist
+
+      - name: Generate application key
+        run: php artisan key:generate
 
       - name: Lint code with Pint
         run: ./vendor/bin/pint --test
 
-      - name: Run unit tests
-        run: ./vendor/bin/phpunit tests/Unit
+      - name: Run application tests
+        run: php artisan test
 
       - name: Demonstrate GitHub Secrets
         env:
