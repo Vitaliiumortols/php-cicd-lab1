@@ -4,12 +4,26 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-abstract class AbstractEntity
+use Illuminate\Database\Eloquent\Model;
+
+abstract class AbstractEntity extends Model
 {
-    public function __construct(
-        protected string $id,
-        protected string $createdAt
-    ) {}
+    protected string $legacyId = '';
+
+    protected string $createdAt = '';
+
+    public function __construct(array|string $attributes = [], ?string $createdAt = null)
+    {
+        if (is_array($attributes)) {
+            parent::__construct($attributes);
+
+            return;
+        }
+
+        parent::__construct();
+        $this->legacyId = $attributes;
+        $this->createdAt = $createdAt ?? '';
+    }
 
     abstract public function getDetails(): string;
 }

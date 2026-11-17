@@ -1,11 +1,10 @@
 name: PHP CI Application
 
 on:
-  workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: [main, feature/eloquent-migrations-relations]
   pull_request:
-    branches: ["main"]
+    branches: [main]
 
 jobs:
   build:
@@ -17,24 +16,24 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
-
-      - name: Prepare environment
-        run: cp .env.example .env
+          php-version: '8.2'
 
       - name: Install dependencies
-        run: composer install -q --no-ansi --no-interaction --no-progress --prefer-dist
+        run: composer install --no-interaction --prefer-dist
 
-      - name: Generate application key
-        run: php artisan key:generate
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
-      - name: Lint code with Pint
+      - name: Ensure SQLite database exists
+        run: touch database/database.sqlite
+
+      - name: Run migrations
+        run: php artisan migrate:fresh --seed --force
+
+      - name: Check code style
         run: ./vendor/bin/pint --test
 
-      - name: Run application tests
+      - name: Run tests
         run: php artisan test
-
-      - name: Demonstrate GitHub Secrets
-        env:
-          MY_SUPER_SECRET_KEY: ${{ secrets.MY_SUPER_SECRET_KEY }}
-        run: echo "Secret value is $MY_SUPER_SECRET_KEY"
