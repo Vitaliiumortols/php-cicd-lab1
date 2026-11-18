@@ -4,80 +4,82 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    private array $products = [
-        [
-            'id' => 1,
-            'model_name' => 'iPhone 15',
-            'color' => 'Black',
-            'storage_gb' => 128,
-            'price' => 29999,
-        ],
-        [
-            'id' => 2,
-            'model_name' => 'iPhone 16',
-            'color' => 'White',
-            'storage_gb' => 256,
-            'price' => 42999,
-        ],
-        [
-            'id' => 3,
-            'model_name' => 'iPhone 16 Pro',
-            'color' => 'Titanium',
-            'storage_gb' => 256,
-            'price' => 52999,
-        ],
-    ];
-
     public function index(): JsonResponse
     {
-        return response()->json([
-            'status' => 'success',
-            'data' => $this->products,
-        ]);
+        $products = Product::query()
+            ->with(['category:id,name', 'tags:id,name'])
+            ->where('active', true)
+            ->orderBy('model_name')
+            ->get();
+
+        return response()->json(['status' => 'success', 'data' => $products]);
     }
 
     public function store(Request $request): JsonResponse
     {
-        $data = $request->validate([
+        $validated = $this->validateProduct($request);
+        $tags = $validated['tags'] ?? [];
+        unset($validated['tags']);
+
+        $product = Product::create($validated);
+        $product->tags()->sync($tags);
+        $product->load(['category:id,name', 'tags:id,name']);
+
+        return response()->json(['status' => 'created', 'data' => $product], 201);
+    }
+
+    public function show(Product $product): JsonResponse
+    {
+        $product->load(['category:id,name', 'tags:id,name']);
+
+        return response()->json(['status' => 'success', 'data' => $product]);
+    }
+
+    public function update(Request $request, Product $product): JsonResponse
+    {
+        $validated = $this->validateProduct($request, $product);
+        $tags = $validated['tags'] ?? null;
+        unset($validated['tags']);
+
+        $product->update($validated);
+        if ($tags !== null) {
+            $product->tags()->sync($tags);
+        }
+
+        $product->load(['category:id,name', 'tags:id,name']);
+
+        return response()->json(['status' => 'updated', 'data' => $product]);
+    }
+
+    public function destroy(Product $product): JsonResponse
+    {
+        $product->delete();
+
+        return response()->json(['status' => 'deleted']);
+    }
+
+    private function validateProduct(Request $request, ?Product $product = null): array
+    {
+        $id = $product?->id;
+
+        return $request->validate([
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
             'model_name' => ['required', 'string', 'min:2', 'max:100'],
             'color' => ['required', 'string', 'min:2', 'max:50'],
             'storage_gb' => ['required', 'integer', 'min:64'],
-            'price' => ['required', 'numeric', 'min:0'],
+            'sku' => ['required', 'string', 'max:50', 'unique:products,sku,'.$id],
+            'price_kop' => ['required', 'integer', 'min:1'],
+            'stock_qty' => ['required', 'integer', 'min:0'],
+            'reserved_qty' => ['nullable', 'integer', 'min:0', 'lte:stock_qty'],
+            'active' => ['nullable', 'boolean'],
+            'tags' => ['nullable', 'array'],
+            'tags.*' => ['integer', 'exists:tags,id'],
         ]);
-
-        $product = [
-            'id' => count($this->products) + 1,
-            'model_name' => $data['model_name'],
-            'color' => $data['color'],
-            'storage_gb' => $data['storage_gb'],
-            'price' => $data['price'],
-        ];
-
-        return response()->json([
-            'status' => 'created',
-            'data' => $product,
-        ], 201);
-    }
-
-    public function show(string $id): JsonResponse
-    {
-        foreach ($this->products as $product) {
-            if ($product['id'] === (int) $id) {
-                return response()->json([
-                    'status' => 'success',
-                    'data' => $product,
-                ]);
-            }
-        }
-
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Товар не знайдено',
-        ], 404);
     }
 }
