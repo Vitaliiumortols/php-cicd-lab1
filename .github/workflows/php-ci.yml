@@ -2,7 +2,7 @@ name: PHP CI Application
 
 on:
   push:
-    branches: [main, feature/eloquent-migrations-relations]
+    branches: [main, feature/blade-views-forms]
   pull_request:
     branches: [main]
 

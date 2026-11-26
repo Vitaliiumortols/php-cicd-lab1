@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">iPhoneHub фактична MVC архітектура лабораторної роботи 7</title>
+  <desc id="desc">Схема потоку від браузера через маршрути та контролери до Blade представлень, Eloquent моделей і бази даних.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#172b4d" flood-opacity="0.12"/></filter>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#4a6fa5"/></marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#37835b"/></marker>
+    <style>
+      .title{font:700 28px Inter,Arial,sans-serif;fill:#172b4d}.sub{font:400 16px Inter,Arial,sans-serif;fill:#52667a}
+      .h{font:700 16px Inter,Arial,sans-serif;fill:#172b4d}.t{font:400 13px Inter,Arial,sans-serif;fill:#52667a}
+      .panel-title{font:700 17px Inter,Arial,sans-serif}.flow{fill:none;stroke-width:2.5;marker-end:url(#arrow-blue)}
+    </style>
+  </defs>
+  <rect width="1600" height="1080" fill="#f8fafc"/>
+  <text x="55" y="55" class="title">iPhoneHub — фактична архітектура лабораторної роботи №7</text>
+  <text x="55" y="84" class="sub">Laravel SSR: resource routes → controllers → Eloquent та Blade → HTML-відповідь</text>
+
+  <g filter="url(#shadow)">
+    <rect x="555" y="115" width="490" height="70" rx="14" fill="#e8f0fe" stroke="#4a6fa5" stroke-width="2"/>
+    <text x="800" y="143" text-anchor="middle" class="h">Браузер користувача</text>
+    <text x="800" y="166" text-anchor="middle" class="t">GET · POST · PUT/PATCH · DELETE</text>
+    <rect x="455" y="225" width="690" height="76" rx="14" fill="#fff4d6" stroke="#c99820" stroke-width="2"/>
+    <text x="800" y="253" text-anchor="middle" class="h">routes/web.php</text>
+    <text x="800" y="277" text-anchor="middle" class="t">7 Route::resource + позиції кошика + доставка замовлення</text>
+  </g>
+  <path d="M800 185 L800 225" class="flow" stroke="#4a6fa5"/>
+
+  <g filter="url(#shadow)">
+    <rect x="55" y="350" width="1490" height="245" rx="16" fill="#fff" stroke="#37835b" stroke-width="2"/>
+    <path d="M55 396 H1545" stroke="#37835b" stroke-width="2"/>
+    <rect x="55" y="350" width="1490" height="46" rx="16" fill="#eaf7f0"/>
+    <text x="82" y="379" class="panel-title" fill="#173c2a">Контролери застосунку</text>
+  </g>
+  <path d="M800 301 L800 350" fill="none" stroke="#8a742d" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+
+  <g>
+    <g transform="translate(80 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">ProductController</text><text x="16" y="55" class="t"><tspan x="16">Product · Category · Tag</tspan><tspan x="16" dy="21">CRUD і фільтри</tspan><tspan x="16" dy="21">sync() тегів</tspan></text></g>
+    <g transform="translate(290 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">CategoryController</text><text x="16" y="55" class="t"><tspan x="16">Category · Product</tspan><tspan x="16" dy="21">CRUD категорій</tspan><tspan x="16" dy="21">withCount(products)</tspan></text></g>
+    <g transform="translate(500 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">TagController</text><text x="16" y="55" class="t"><tspan x="16">Tag · Product</tspan><tspan x="16" dy="21">CRUD тегів</tspan><tspan x="16" dy="21">зв’язок M:M</tspan></text></g>
+    <g transform="translate(710 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">UserController</text><text x="16" y="55" class="t"><tspan x="16">User · Cart · Order</tspan><tspan x="16" dy="21">CRUD користувачів</tspan><tspan x="16" dy="21">архівування історії</tspan></text></g>
+    <g transform="translate(920 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">CartController</text><text x="16" y="55" class="t"><tspan x="16">Cart · CartItem</tspan><tspan x="16" dy="21">Product</tspan><tspan x="16" dy="21">CRUD + позиції</tspan></text></g>
+    <g transform="translate(1130 420)"><rect width="195" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="16" y="28" class="h">OrderController</text><text x="16" y="55" class="t"><tspan x="16">Order · OrderItem</tspan><tspan x="16" dy="21">транзакція</tspan><tspan x="16" dy="21">резерв товару</tspan></text></g>
+    <g transform="translate(1340 420)"><rect width="180" height="145" rx="12" fill="#f3fbf6" stroke="#72ad8d"/><text x="14" y="28" class="h">ShipmentController</text><text x="14" y="55" class="t"><tspan x="14">Shipment · Order</tspan><tspan x="14" dy="21">CRUD доставки</tspan><tspan x="14" dy="21">зв’язок 1:1</tspan></text></g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="55" y="660" width="720" height="285" rx="16" fill="#fff" stroke="#7657b5" stroke-width="2"/>
+    <rect x="55" y="660" width="720" height="46" rx="16" fill="#f0ecff"/>
+    <path d="M55 706 H775" stroke="#7657b5" stroke-width="2"/>
+    <text x="82" y="689" class="panel-title" fill="#35265a">Blade View — SSR інтерфейс</text>
+    <rect x="82" y="730" width="318" height="83" rx="10" fill="#f8f6ff" stroke="#a695cf"/>
+    <text x="100" y="756" class="h">layouts/app.blade.php</text><text x="100" y="780" class="t">Bootstrap 5 · navbar · flash · @yield</text>
+    <rect x="420" y="730" width="328" height="83" rx="10" fill="#f8f6ff" stroke="#a695cf"/>
+    <text x="438" y="756" class="h">components/form/*</text><text x="438" y="780" class="t">old() · @error · повторне використання</text>
+    <rect x="82" y="830" width="666" height="88" rx="10" fill="#f8f6ff" stroke="#a695cf"/>
+    <text x="100" y="856" class="h">CRUD сторінки всіх сутностей</text>
+    <text x="100" y="882" class="t">catalog · categories · tags · users · carts · orders · shipments</text>
+    <text x="100" y="904" class="t">index · show · create · edit · _form</text>
+
+    <rect x="825" y="660" width="720" height="285" rx="16" fill="#fff" stroke="#3e7498" stroke-width="2"/>
+    <rect x="825" y="660" width="720" height="46" rx="16" fill="#eaf4fb"/>
+    <path d="M825 706 H1545" stroke="#3e7498" stroke-width="2"/>
+    <text x="852" y="689" class="panel-title" fill="#193a51">Eloquent Model — предметна область</text>
+    <rect x="852" y="730" width="430" height="185" rx="10" fill="#f3f8fc" stroke="#78a4c2"/>
+    <text x="874" y="759" class="h">9 Eloquent моделей</text>
+    <text x="874" y="789" class="t"><tspan x="874">User · Category · Product · Tag</tspan><tspan x="874" dy="23">Cart · CartItem · Order · OrderItem</tspan><tspan x="874" dy="23">Shipment</tspan><tspan x="874" dy="30">hasOne · hasMany · belongsTo</tspan><tspan x="874" dy="23">belongsToMany</tspan></text>
+    <path d="M1334 742 C1405 742 1430 760 1430 785 V858 C1430 883 1405 901 1334 901 C1263 901 1238 883 1238 858 V785 C1238 760 1263 742 1334 742Z" fill="#e4f0f8" stroke="#3e7498" stroke-width="2"/>
+    <ellipse cx="1334" cy="785" rx="96" ry="43" fill="#edf6fb" stroke="#3e7498" stroke-width="2"/>
+    <text x="1334" y="790" text-anchor="middle" class="h">SQLite</text>
+    <text x="1334" y="835" text-anchor="middle" class="t">10 таблиць</text><text x="1334" y="858" text-anchor="middle" class="t">FK · UNIQUE · CASCADE</text>
+  </g>
+  <path d="M430 595 L430 660" class="flow" stroke="#7657b5"/>
+  <path d="M1170 595 L1170 660" class="flow" stroke="#3e7498"/>
+  <path d="M1282 822 L1238 822" fill="none" stroke="#3e7498" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="175" y="985" width="1250" height="64" rx="12" fill="#fff1f0" stroke="#c85c5a" stroke-width="2"/>
+  <text x="800" y="1012" text-anchor="middle" class="h">Захист форм</text>
+  <text x="800" y="1035" text-anchor="middle" class="t">@csrf · @method('PUT' / 'DELETE') · $request→validate() · flash success/error</text>
+</svg>
