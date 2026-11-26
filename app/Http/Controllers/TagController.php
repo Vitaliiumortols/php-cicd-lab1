@@ -6,45 +6,73 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class TagController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(Request $request): View|JsonResponse
     {
-        return response()->json(Tag::withCount('products')->orderBy('name')->get());
+        $tags = Tag::withCount('products')->orderBy('name');
+
+        return $request->expectsJson()
+            ? response()->json($tags->get())
+            : view('tags.index', ['tags' => $tags->paginate(10)]);
     }
 
-    public function store(Request $request): JsonResponse
+    public function create(): View
     {
-        return response()->json(Tag::create($this->validated($request)), 201);
+        return view('tags.create');
     }
 
-    public function show(Tag $tag): JsonResponse
+    public function store(Request $request): RedirectResponse|JsonResponse
     {
-        return response()->json($tag->load('products.category'));
+        $tag = Tag::create($this->validated($request));
+
+        return $request->expectsJson()
+            ? response()->json($tag, 201)
+            : redirect()->route('tags.index')->with('success', 'Тег створено.');
     }
 
-    public function update(Request $request, Tag $tag): JsonResponse
+    public function show(Tag $tag, Request $request): View|JsonResponse
+    {
+        $tag->load('products.category');
+
+        return $request->expectsJson()
+            ? response()->json($tag)
+            : view('tags.show', ['tag' => $tag]);
+    }
+
+    public function edit(Tag $tag): View
+    {
+        return view('tags.edit', ['tag' => $tag]);
+    }
+
+    public function update(Request $request, Tag $tag): RedirectResponse|JsonResponse
     {
         $tag->update($this->validated($request, $tag));
 
-        return response()->json($tag);
+        return $request->expectsJson()
+            ? response()->json($tag)
+            : redirect()->route('tags.show', $tag)->with('success', 'Тег оновлено.');
     }
 
-    public function destroy(Tag $tag): JsonResponse
+    public function destroy(Tag $tag, Request $request): RedirectResponse|JsonResponse
     {
         $tag->delete();
 
-        return response()->json(['status' => 'deleted']);
+        return $request->expectsJson()
+            ? response()->json(['status' => 'deleted'])
+            : redirect()->route('tags.index')->with('success', 'Тег видалено.');
     }
 
     private function validated(Request $request, ?Tag $tag = null): array
     {
         return $request->validate([
             'name' => ['required', 'string', 'max:100', Rule::unique('tags')->ignore($tag)],
-            'slug' => ['required', 'string', 'max:100', Rule::unique('tags')->ignore($tag)],
+            'slug' => ['required', 'string', 'max:100', 'alpha_dash:ascii', Rule::unique('tags')->ignore($tag)],
         ]);
     }
 }

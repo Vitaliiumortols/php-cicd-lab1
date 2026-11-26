@@ -2,51 +2,43 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\LegacyProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Models\Cart;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Shipment;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return response()->json([
-        'project' => 'iPhoneHub',
-        'laboratory' => 6,
-        'variant' => 18,
-        'student' => 'Томенко Віталій Ігорович, КН-42',
-        'database' => 'SQLite + Eloquent ORM',
+    return view('home', [
+        'counts' => [
+            'products' => Product::count(),
+            'categories' => Category::count(),
+            'tags' => Tag::count(),
+            'users' => User::count(),
+            'carts' => Cart::count(),
+            'orders' => Order::count(),
+            'shipments' => Shipment::count(),
+        ],
     ]);
-});
+})->name('home');
 
 Route::get('/health', fn () => response()->json(['status' => 'OK']));
 
-// Маршрути лабораторної №5 залишені для сумісності з попередніми тестами.
-Route::prefix('products')->name('products.')->group(function () {
-    Route::get('/', [LegacyProductController::class, 'index'])->name('index');
-    Route::post('/', [LegacyProductController::class, 'store'])->middleware('store.client')->name('store');
-    Route::get('/{id}', [LegacyProductController::class, 'show'])->whereNumber('id')->name('show');
-});
-
-Route::get('/catalog', [ProductController::class, 'index']);
-Route::post('/catalog', [ProductController::class, 'store']);
-Route::get('/catalog/{product}', [ProductController::class, 'show']);
-Route::put('/catalog/{product}', [ProductController::class, 'update']);
-Route::delete('/catalog/{product}', [ProductController::class, 'destroy']);
-
-Route::apiResource('categories', CategoryController::class);
-Route::apiResource('tags', TagController::class);
-
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{user}', [UserController::class, 'show']);
-
-Route::get('/carts/{cart}', [CartController::class, 'show']);
-Route::post('/carts/{cart}/items', [CartController::class, 'addItem']);
-
-Route::get('/orders', [OrderController::class, 'index']);
-Route::post('/orders', [OrderController::class, 'store']);
-Route::get('/orders/{order}', [OrderController::class, 'show']);
-
-Route::post('/orders/{order}/shipment', [ShipmentController::class, 'store']);
-Route::get('/shipments/{shipment}', [ShipmentController::class, 'show']);
+Route::resource('catalog', ProductController::class)->parameters(['catalog' => 'product']);
+Route::resource('categories', CategoryController::class);
+Route::resource('tags', TagController::class);
+Route::resource('users', UserController::class);
+Route::resource('carts', CartController::class);
+Route::post('/carts/{cart}/items', [CartController::class, 'addItem'])->name('carts.items.store');
+Route::delete('/carts/{cart}/items/{cartItem}', [CartController::class, 'removeItem'])->name('carts.items.destroy');
+Route::resource('orders', OrderController::class);
+Route::resource('shipments', ShipmentController::class);
+Route::post('/orders/{order}/shipment', [ShipmentController::class, 'storeForOrder'])->name('orders.shipment.store');
